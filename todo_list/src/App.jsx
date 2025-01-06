@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 // const App = () => {
   // const arr = [1,2,3,4,5];
   // return <div className = "App">{arr.filter((num) => (num !== 3))}</div>
@@ -38,7 +40,6 @@ const handleSubmit = (e) =>{
   setTodo("");
   return;
 
-
 }
   
 
@@ -63,22 +64,12 @@ const handleEdit = (id)  =>{
 return <div classNmae ="App"> 
 <div className="container">
   <h1>Todo List App</h1>
-  <form className="todoForm" onSubmit={handleSubmit}>
-    <input type = "text" value={todo} onChange={(e) => setTodo(e.target.value)} />
-    <button type="submit"> {editId ? "Edit" : "Go"} </button>
-  </form>
+  <TodoForm  handleSubmit={handleSubmit} todo={todo} editId={editId} setTodo={setTodo} />
 
-  <ul  className="allTools">
-    {
-      todos.map((t) => (
-      <li className="singleTodo">
-     <span className="todoText" key={t.id}>{t.todo}</span>
-     <button onClick={() => handleEdit(t.id)}>Edit</button>
-     <button onClick={() => handleDelete(t.id)}>Delete</button>
-</li>
-))}
-   
-</ul>
+  <TodoList  todos={todos}  handleEdit={handleEdit} handleDelete={handleDelete}/>
+  
+
+  
 
 </div>
   
